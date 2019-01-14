@@ -26,6 +26,24 @@
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-netty</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-gson</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- test scope -->
+        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit</artifactId>
             <version>${kotlin.version}</version>
@@ -37,23 +55,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-netty</artifactId>
-            <version>${ktor.version}</version>
-        </dependency>
-
-	<dependency>
-	    <groupId>ch.qos.logback</groupId>
-	    <artifactId>logback-classic</artifactId>
-	    <version>${logback.version}</version>
-	</dependency>
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <plugins>
             <plugin>
@@ -78,9 +84,21 @@
                 </executions>
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
-                    <args>
-                        <arg>-Xcoroutines=enable</arg>
-                    </args>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.keithkim.sample.MainKt</mainClass>
                 </configuration>
             </plugin>
         </plugins>
